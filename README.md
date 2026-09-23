@@ -119,7 +119,7 @@ The text carries the violet tint instead of the ground.
 
 ## Credits
 
-- `1-neon-saturn.jpg` to `7-desert-run.jpg`: original artwork made for this theme.
+- `1-neon-saturn.jpg` to `7-desert-run.jpg`: AI-generated for this theme.
 - `omarchy.png` and `unlock.png`: the [Omarchy](https://github.com/omacom/omarchy)
   logo (MIT), recoloured.
 
