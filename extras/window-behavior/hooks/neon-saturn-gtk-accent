@@ -1,0 +1,17 @@
+#!/bin/bash
+# Point the GNOME accent colour at Neon Saturn's violet while that theme is
+# active, so GTK apps (Files, dialogs) follow it. Any other theme gets back the
+# accent that was set before the window-behavior extra was installed.
+command -v gsettings >/dev/null 2>&1 || exit 0
+[[ -n ${DBUS_SESSION_BUS_ADDRESS:-} ]] || exit 0
+
+SAVED="$HOME/.local/state/omarchy-neon-saturn/accent-color"
+
+if [[ ${1:-} == neon-saturn ]]; then
+  accent=purple
+else
+  accent=$(cat "$SAVED" 2>/dev/null)
+  accent=${accent:-blue}
+fi
+
+gsettings set org.gnome.desktop.interface accent-color "$accent" 2>/dev/null || true

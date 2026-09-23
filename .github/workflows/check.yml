@@ -1,0 +1,51 @@
+name: Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Palette has every Omarchy colour key
+        run: |
+          python3 - <<'PY'
+          import re, tomllib
+          c = tomllib.load(open("colors.toml", "rb"))
+          keys = """accent selection muted background dark_background darker_background
+            lighter_background foreground dark_foreground light_foreground bright_foreground
+            red yellow orange green cyan blue magenta brown bright_red bright_yellow
+            bright_green bright_cyan bright_blue bright_magenta""".split()
+          missing = [k for k in keys if k not in c]
+          bad = [k for k in keys if k in c and not re.fullmatch(r"#[0-9A-Fa-f]{6}", c[k])]
+          assert not missing and not bad, f"missing={missing} bad={bad}"
+          assert c.get("mode") in ("dark", "light")
+          PY
+
+      - name: Required theme files exist
+        run: |
+          for f in colors.toml icons.theme preview.png preview-unlock.png unlock.png README.md LICENSE; do
+            test -f "$f" || { echo "missing $f"; exit 1; }
+          done
+          ls backgrounds/*.jpg backgrounds/*.png >/dev/null
+
+      - name: Nothing at the root that Omarchy drops from an installed theme
+        run: |
+          for f in *.lua alacritty.toml foot.ini ghostty.conf kitty.conf vscode.json; do
+            test ! -e "$f" || { echo "$f is ignored by 'omarchy theme install'; ship it in extras/"; exit 1; }
+          done
+
+      - name: ShellCheck
+        run: shellcheck extras/window-behavior/install.sh extras/window-behavior/hooks/*
+
+      - name: Lua syntax
+        run: |
+          sudo apt-get install -y --no-install-recommends lua5.4 >/dev/null
+          luac5.4 -p extras/window-behavior/hypr/*.lua

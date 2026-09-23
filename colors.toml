@@ -1,0 +1,39 @@
+mode = "dark"
+
+# The ground stays near-neutral (OKLCH chroma 0.024, inside the 0.000-0.030
+# band of Omarchy's comfortable stock themes) and the text carries the violet
+# tint. Full neon chroma is kept for the window glow below, which is never read.
+
+accent = "#B18DED"
+selection = "#343051"
+muted = "#82829C"
+
+background = "#191A26"
+dark_background = "#12131C"
+darker_background = "#0D0D14"
+lighter_background = "#25263B"
+
+foreground = "#B8B6DA"
+dark_foreground = "#8A89A7"
+light_foreground = "#E4C6EB"
+bright_foreground = "#E1DDFA"
+
+# Sampled from the wallpaper's moon and neon trails.
+hyprland_active_border = "rgba(8b44f0ee) rgba(c85ffbee) 45deg"
+hyprland_inactive_border = "rgba(25263b99)"
+
+red = "#F47791"
+yellow = "#DCB465"
+orange = "#ED946C"
+green = "#6BD8AC"
+cyan = "#4F9DC8"
+blue = "#7F95EC"
+magenta = "#C385E5"
+brown = "#906968"
+
+bright_red = "#FD93A6"
+bright_yellow = "#F1CB83"
+bright_green = "#8AEBC2"
+bright_cyan = "#6DB6E0"
+bright_blue = "#98AEFF"
+bright_magenta = "#DA9FFA"
