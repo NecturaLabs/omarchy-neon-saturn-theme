@@ -56,6 +56,15 @@ Install it after the theme:
 ~/.config/omarchy/themes/neon-saturn/extras/window-behavior/install.sh
 ```
 
+That path exists when you installed from the repository URL. An install by name
+from the Omarchy theme marketplace copies only the theme files, so clone the
+repository and run the script from there:
+
+```bash
+git clone https://github.com/NecturaLabs/omarchy-neon-saturn-theme.git
+omarchy-neon-saturn-theme/extras/window-behavior/install.sh
+```
+
 - `--no-gtk` installs only the Hyprland part and leaves GTK apps alone.
 - `--uninstall` removes everything it installed and restores what it replaced.
   Run it before you remove the theme, while the script is still on disk.
